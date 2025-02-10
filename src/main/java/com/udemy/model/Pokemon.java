@@ -1,20 +1,47 @@
 package com.udemy.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "pokemon_table")
 public class Pokemon {
 
-    private final String name;
-    private final Integer indexPokedex;
+    @Id
+    @Column(name = "id_pokemon")
+    private Integer indexPokedex;
+    @Column
+    private String name;
 
-    public Pokemon( Integer indexPokedex, String name) {
+    @Column
+    private Double price;
+
+    @Column
+    private Integer remaing;
+
+    public Integer getIndexPokedex() {
+        return indexPokedex;
+    }
+
+    public void setIndexPokedex(Integer indexPokedex) {
         this.indexPokedex = indexPokedex;
-        this.name = name;
     }
 
     public String getName() {
         return name;
     }
 
-    public Integer getIndexPokedex() {
-        return indexPokedex;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice(){
+        return price;
+    }
+
+    public void setPrice(Double price){
+        this.price = price;
     }
 }

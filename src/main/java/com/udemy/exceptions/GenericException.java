@@ -3,17 +3,18 @@ package com.udemy.exceptions;
 
 import java.util.Date;
 
-public class GenericException extends Exception{
+public class GenericException {
 
     private Date timestamp;
     private String message;
     private String details;
+    private int statusCode;
 
-    public GenericException(Date timestamp, String message, String details) {
-        super(message);
+    public GenericException(Date timestamp, String message, String details, int statusCode) {
         this.timestamp = timestamp;
         this.message = message;
         this.details = details;
+        this.statusCode = statusCode;
     }
 
     public Date getTimestamp() {
@@ -28,4 +29,7 @@ public class GenericException extends Exception{
         return details;
     }
 
+    public int getStatus() {
+        return statusCode;
+    }
 }

@@ -11,7 +11,7 @@
 	<groupId>com.udemy</groupId>
 	<artifactId>Sistemas-Ecommerce</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Sistemas-Ecommerce</name>
+	<name>ecommerce-system</name>
 	<description>Praticando criação de sistemas</description>
 	<url/>
 	<licenses>
@@ -47,10 +47,13 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.33</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-docker-compose</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 	</dependencies>
 
