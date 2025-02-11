@@ -1,9 +1,9 @@
 package com.udemy.repository;
 
-import com.udemy.model.Pokemon;
+import com.udemy.repository.dto.CardDTO;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ApplicationRepository extends CrudRepository<Pokemon, Integer> {
+public interface ApplicationRepository extends CrudRepository<CardDTO, Integer> {
 
 
 }

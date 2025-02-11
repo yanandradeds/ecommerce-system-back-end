@@ -1,8 +1,9 @@
 package com.udemy.controller;
 
 
-import com.udemy.repository.ApplicationRepository;
-import com.udemy.model.Pokemon;
+import com.udemy.repository.dto.CardDTO;
+import com.udemy.util.CustomUtils;
+import com.udemy.vo.PokemonVO;
 import com.udemy.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/pokemon")
+@RequestMapping(path = { "/pokemon", "/pokemon/"})
 public class MyApiController {
 
     @Autowired
@@ -20,23 +21,21 @@ public class MyApiController {
     private final Logger logger = Logger.getLogger(MyApiController.class.getName());
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<Pokemon> findAll(){
+    public ArrayList<PokemonVO> findAll(){
         logger.info("Searching all data from pokemon table");
-        return service.findAllPokemon();
+        return CustomUtils.CustomModelMapper.mappingList(service.findAllPokemon());
     }
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Pokemon createPokemonDatabase(@RequestBody Pokemon actual){
+    public PokemonVO createCardDatabase(@RequestBody PokemonVO actual){
         logger.info("A criar uma nova inserção na tabela de pokemons");
-        Pokemon entity = new Pokemon();
-        entity.setIndexPokedex(actual.getIndexPokedex());
-        entity.setName(actual.getName());
-
-        return service.createRowPokemon(entity);
+        CardDTO entity = CustomUtils.CustomModelMapper.mapping(actual);
+        return CustomUtils.CustomModelMapper.mapping(service.createRowPokemon(entity));
     }
 
     @GetMapping(value = "/{index}")
-    public Pokemon returnByIndex(@PathVariable Integer index){
-        return service.findByIndexPokemon(index);
+    public PokemonVO findById(@PathVariable Integer index){
+        logger.info("finding card by id");
+        return CustomUtils.CustomModelMapper.mapping(service.findByIndexPokemon(index));
     }
 }
