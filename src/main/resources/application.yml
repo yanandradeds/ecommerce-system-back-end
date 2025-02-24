@@ -9,5 +9,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
+spring-doc:
+  paths-to-match:
+    - /pokemon/**
+  swagger-ui:
+    use-root-path: true
 
