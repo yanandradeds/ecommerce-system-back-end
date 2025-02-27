@@ -1,6 +1,6 @@
 # API Card Ecommerce
 
-### Api who returns informations about my virtual pokemon's card shop
+### Api who returns informations about my virtual (fake) pokemon's card shop
 
 
 
