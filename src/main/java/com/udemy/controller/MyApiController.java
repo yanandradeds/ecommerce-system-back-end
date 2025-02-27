@@ -2,8 +2,8 @@ package com.udemy.controller;
 
 
 import com.udemy.dto.CardDTO;
-import com.udemy.util.CustomUtils;
 import com.udemy.service.RepositoryService;
+import com.udemy.util.CustomUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -77,5 +77,12 @@ public class MyApiController {
         service.updateCard(body);
     }
 
-
+    @DeleteMapping(value = "/delete/{id}")
+    @Operation(summary = "Delete a card by your id")
+    @ApiResponse(responseCode = "200", description = "Success")
+    @ApiResponse(responseCode = "404", description = "Not found")
+    @ApiResponse(responseCode = "500", description = "Internal server error")
+    public void deleteCardById(@PathVariable Integer id){
+        service.deleteRowCard(id);
+    }
 }

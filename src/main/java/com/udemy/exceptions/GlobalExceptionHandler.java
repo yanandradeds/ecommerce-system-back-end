@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-
 import java.util.Date;
 
 
@@ -26,13 +25,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<GenericException> invalidMathOperationException(Exception ex, WebRequest request) {
+    public ResponseEntity<GenericException> resourceNotFound(Exception ex, WebRequest request) {
 
         GenericException localException = new GenericException(new Date(),
                 ex.getMessage(),
                 request.getDescription(false),
                 HttpStatus.BAD_REQUEST.value());
 
-        return new ResponseEntity<>(localException, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(localException, HttpStatus.NOT_FOUND);
     }
 }

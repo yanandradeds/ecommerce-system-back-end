@@ -38,8 +38,9 @@ public class RepositoryService {
         repository.save(toUpdate);
     }
 
-    public void deleteRowCard(Integer index){
-        repository.deleteById(index);
+    public void deleteRowCard(Integer id){
+        repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found any card for delete"));
+        repository.deleteById(id);
     }
 
 
