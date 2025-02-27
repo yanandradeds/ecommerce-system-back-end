@@ -1,27 +1,12 @@
-package com.udemy.repository.dto;
+package com.udemy.dto;
 
 
-import jakarta.persistence.*;
-
-
-@Entity(name = "pokemon_table")
 public class CardDTO {
 
-    @Id
-    @Column(name = "id_card_pokemon")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-
-    @Column(nullable = false)
     String name;
-
-    @Column(nullable = false)
-    Integer remains = 0;
-
-
-    @Column(nullable = false)
+    Integer quantity = 0;
     Double price = 0d;
-
 
     public Integer getId() {
         return id;
@@ -39,12 +24,12 @@ public class CardDTO {
         this.name = name;
     }
 
-    public Integer getRemains() {
-        return remains;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setRemains(Integer remains) {
-        this.remains = remains;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Double getPrice() {

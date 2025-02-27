@@ -1,9 +1,8 @@
 package com.udemy.repository;
 
-import com.udemy.repository.dto.CardDTO;
+import com.udemy.model.CardModel;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ApplicationRepository extends CrudRepository<CardDTO, Integer> {
-
+public interface ApplicationRepository extends CrudRepository<CardModel, Integer> {
 
 }
