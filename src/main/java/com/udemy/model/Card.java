@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 
 @Entity(name = "card_table")
-public class CardModel {
+public class Card {
 
     @Id
     @Column(name = "id_card")

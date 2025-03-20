@@ -14,4 +14,9 @@ spring-doc:
     - /pokemon/**
   swagger-ui:
     use-root-path: true
+security:
+  jwt:
+    token:
+      secret-key: 25745e
+      expire-length: 3600000
 
