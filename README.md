@@ -1,5 +1,9 @@
-# SistemaEcommerce
-Construindo um sistemas eccomerce
+# API Card Ecommerce
+
+### Api who returns informations about my virtual (fake) pokemon's card shop
 
 
-### ISSO É UM TESTE
+
+
+
+
