@@ -12,6 +12,7 @@ spring:
 spring-doc:
   paths-to-match:
     - /pokemon/**
+    - /auth/**
   swagger-ui:
     use-root-path: true
 security:

@@ -12,19 +12,21 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
 
-public class JwtTokenFilter extends GenericFilterBean {
+public class TokenFilter extends GenericFilterBean {
+
+    private final TokenHandler tokenProvider;
 
     @Autowired
-    private JwtTokenProvider tokenProvider;
-
-    public JwtTokenFilter(JwtTokenProvider tokenProvider) {
+    public TokenFilter(TokenHandler tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
         String token = tokenProvider.resolveToken((HttpServletRequest) servletRequest);
-        if(!token.isEmpty() || !token.isBlank() || tokenProvider.validateToken(token)){
+
+        if(!token.isEmpty() || tokenProvider.validateToken(token)){
             Authentication auth = tokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
@@ -32,7 +34,4 @@ public class JwtTokenFilter extends GenericFilterBean {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    public void setTokenProvider(JwtTokenProvider tokenProvider) {
-        this.tokenProvider = tokenProvider;
-    }
 }

@@ -4,14 +4,12 @@ import java.util.Date;
 
 public class TokenVO {
 
+    String username;
+    String accessToken;
+    String refreshToken;
     Date created;
     Date expiration;
-    String username;
-    String refreshToken;
-    String accessToken;
     Boolean authenticated;
-
-
 
     public Date getCreated() {
         return created;

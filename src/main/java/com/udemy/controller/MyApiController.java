@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 public class MyApiController {
 
 
-
     @Autowired
     private RepositoryService service;
     private final Logger logger = Logger.getLogger(MyApiController.class.getName());
@@ -49,9 +48,10 @@ public class MyApiController {
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void createCard(@RequestBody CardDTO body){
+    public CardDTO createCard(@RequestBody CardDTO body){
         logger.info("A criar uma nova inserção na tabela de pokemons");
         service.createCard(CustomUtils.CustomModelMapper.mapping(body));
+        return body;
     }
 
     @Operation(summary = "Search a card by her id")
@@ -85,4 +85,5 @@ public class MyApiController {
     public void deleteCardById(@PathVariable Integer id){
         service.deleteRowCard(id);
     }
+
 }

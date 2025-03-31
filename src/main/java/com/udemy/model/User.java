@@ -3,7 +3,8 @@ package com.udemy.model;
 import jakarta.persistence.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,7 +27,7 @@ public class User implements UserDetails {
             joinColumns = {@JoinColumn(name = "id_user")},
             inverseJoinColumns = {@JoinColumn(name = "id_permission")}
     )
-    private Set<Permission> permissions = new HashSet<>();
+    private Set<Permission> permissions;
 
     @Column(name = "account_non_expired", nullable = false)
     private Boolean isAccountNonExpired;
@@ -41,8 +42,8 @@ public class User implements UserDetails {
     private Boolean isEnabled;
 
     @Override
-    public Set<Permission> getAuthorities() {
-        return permissions;
+    public String getUsername() {
+        return username;
     }
 
     @Override
@@ -51,8 +52,8 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return username;
+    public Set<Permission> getAuthorities() {
+        return permissions;
     }
 
     @Override
@@ -73,6 +74,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+
+    public List<String> getRoles(Set<Permission> permissions) {
+        ArrayList<String> roles = new ArrayList<>();
+        permissions.forEach(p -> roles.add(p.getDescription()));
+
+        return roles;
     }
 
 
