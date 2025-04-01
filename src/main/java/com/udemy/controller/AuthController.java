@@ -11,10 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Authentication Endpoints")
 @RestController
@@ -34,5 +31,14 @@ public class AuthController {
     @GetMapping
     public TokenVO signIn(@RequestBody UserVO credentials){
         return authService.signIn(credentials).getBody();
+    }
+
+    @PostMapping(value = "/create")
+    public String createUser(@RequestBody UserVO user){
+        if(authService.createUser(user)){
+            return "Success";
+        }
+
+        return "User not created, probably username already exists";
     }
 }

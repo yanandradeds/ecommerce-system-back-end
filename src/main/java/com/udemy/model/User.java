@@ -84,5 +84,31 @@ public class User implements UserDetails {
         return roles;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+    }
 }
