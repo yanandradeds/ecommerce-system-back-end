@@ -23,7 +23,6 @@ public class TokenFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
         String token = tokenProvider.resolveToken((HttpServletRequest) servletRequest);
 
         if(!token.isEmpty() || tokenProvider.validateToken(token)){
