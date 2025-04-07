@@ -4,13 +4,15 @@ import com.udemy.dto.CardDTO;
 import com.udemy.exceptions.ResourceNotFoundException;
 import com.udemy.model.Card;
 import com.udemy.repository.ApplicationRepository;
+import com.udemy.util.CustomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
-public class RepositoryService {
+public class CardRepositoryService {
 
     @Autowired
     private ApplicationRepository repository;
@@ -23,11 +25,9 @@ public class RepositoryService {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found resources"));
     }
 
-    public ArrayList<Card> findAllCards(){
-        ArrayList<Card> cards = new ArrayList<>();
-        repository.findAll().forEach(cards::add);
-
-        return cards;
+    public Page<CardDTO> findAllCards(Integer page, Integer limit){
+        Pageable pageable = PageRequest.of(page,limit);
+        return repository.findAll(pageable).map(CustomUtils.CustomModelMapper::mapping);
     }
 
     public void updateCard(CardDTO data) {

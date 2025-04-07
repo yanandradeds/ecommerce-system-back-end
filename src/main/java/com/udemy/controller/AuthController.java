@@ -33,6 +33,10 @@ public class AuthController {
         return authService.signIn(credentials).getBody();
     }
 
+    @Operation
+    @ApiResponse(responseCode = "200", description = "Success", content =  @Content(schema = @Schema(implementation = User.class)))
+    @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema))
+    @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema))
     @PostMapping(value = "/create")
     public String createUser(@RequestBody UserVO user){
         if(authService.createUser(user)){

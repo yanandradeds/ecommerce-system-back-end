@@ -2,7 +2,7 @@ package com.udemy.controller;
 
 
 import com.udemy.dto.CardDTO;
-import com.udemy.service.RepositoryService;
+import com.udemy.service.CardRepositoryService;
 import com.udemy.util.CustomUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -11,10 +11,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/pokemon")
@@ -23,7 +23,7 @@ public class CardPokemonController {
 
 
     @Autowired
-    private RepositoryService service;
+    private CardRepositoryService service;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Find all cards")
@@ -33,8 +33,9 @@ public class CardPokemonController {
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @ApiResponse(responseCode = "404", description = "Not found")
     @ApiResponse(responseCode = "500", description = "Internal server error")
-    public ArrayList<CardDTO> fetchAllCard(){
-        return CustomUtils.CustomModelMapper.mappingList(service.findAllCards());
+    public ResponseEntity<Page<CardDTO>> fetchAllCard(@RequestParam(value = "limit", defaultValue = "12") Integer limit,
+                                                      @RequestParam(value = "page", defaultValue = "0") Integer page){
+        return ResponseEntity.ok(service.findAllCards(page,limit));
     }
 
     @Operation(summary = "Insert a new row of card")
