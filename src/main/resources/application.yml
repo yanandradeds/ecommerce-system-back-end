@@ -4,11 +4,12 @@ spring:
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+server:
+  port: 80
 spring-doc:
   paths-to-match:
     - /pokemon/**
