@@ -1,9 +1,17 @@
 package com.udemy.value.object;
 
-public class UserVO {
+public class UserDTO {
 
+    Long id;
     String username;
     String password;
+
+
+    public UserDTO(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
 
     public String getUsername() {
         return username;
@@ -19,5 +27,13 @@ public class UserVO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

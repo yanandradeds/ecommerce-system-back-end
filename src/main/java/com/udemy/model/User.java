@@ -41,6 +41,14 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private Boolean isEnabled;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String getUsername() {
         return username;

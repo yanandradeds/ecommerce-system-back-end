@@ -39,8 +39,9 @@ public class SecurityConfig {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( authorize -> authorize
-                        .requestMatchers("/pokemon","/pokemon/","/pokemon/**").authenticated()
+                        .requestMatchers("/users","/users/**").authenticated()
                         .requestMatchers("/auth").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .anyRequest().permitAll())
                 .addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
                 //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

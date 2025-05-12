@@ -8,11 +8,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  docker:
+    compose:
+      enabled: false
 server:
-  port: 80
+  port: 8080
 spring-doc:
   paths-to-match:
-    - /pokemon/**
     - /auth/**
   swagger-ui:
     use-root-path: true
@@ -21,4 +26,3 @@ security:
     token:
       secret-key: 25745e
       expire-length: 3600000
-
