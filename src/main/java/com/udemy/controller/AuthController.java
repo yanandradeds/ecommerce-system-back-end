@@ -27,7 +27,7 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
-    @Operation
+    @Operation(summary = "Authenticate in API")
     @ApiResponse(responseCode = "200", description = "Success", content =  @Content(schema = @Schema(implementation = User.class)))
     @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema))
     @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema))
