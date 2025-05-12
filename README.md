@@ -1,6 +1,6 @@
-# REST API For an ecommerce system
+# REST API - Ecommerce System
 
-### For now: CRUD for users endpoints and authentication
+### For now: CRUD of users and authentication
 
 
 
