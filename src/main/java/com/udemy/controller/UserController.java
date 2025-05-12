@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,12 @@ public class UserController {
     @Autowired
     AuthService authService;
 
-    @Operation
+    @PostConstruct
+    public void init() {
+        System.out.println("UserController carregado!");
+    }
+
+    @Operation(summary = "Create a user")
     @ApiResponse(responseCode = "200", description = "Success", content =  @Content(schema = @Schema(implementation = UserDTO.class)))
     @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema))
     @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema))
@@ -38,17 +44,17 @@ public class UserController {
         return "User not created, probably username already exists";
     }
 
-    @Operation
+    @Operation(summary = "Find all users")
     @ApiResponse(responseCode = "200", description = "Success", content =  @Content(schema = @Schema(implementation = UserDTO.class)))
     @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema))
-    @GetMapping()
+    @GetMapping
     public List<UserDTO> findAllUsers() {
         return authService.findAllUsers();
     }
 
 
-    @Operation
+    @Operation(summary = "Find a user by his ID")
     @ApiResponse(responseCode = "200", description = "Success", content =  @Content(schema = @Schema(implementation = UserDTO.class)))
     @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema))
@@ -57,7 +63,7 @@ public class UserController {
         return authService.findById(id);
     }
 
-    @Operation
+    @Operation(summary = "Delete a user by his ID")
     @ApiResponse(responseCode = "200", description = "Success")
     @ApiResponse(responseCode = "403", description = "Forbidden")
     @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema))

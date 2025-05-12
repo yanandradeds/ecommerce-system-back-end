@@ -19,6 +19,7 @@ server:
 spring-doc:
   paths-to-match:
     - /auth/**
+    - /**
   swagger-ui:
     use-root-path: true
 security:

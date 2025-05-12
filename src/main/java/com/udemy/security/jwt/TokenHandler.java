@@ -78,8 +78,8 @@ public class TokenHandler {
             String bearer = req.getHeader("Authorization");
             return bearer.substring("Bearer ".length());
 
-        } catch (NullPointerException e) {
-            System.out.println("Usuario ainda nao autenticado");
+        } catch (NullPointerException ignored) {
+
         }
 
         return "";
