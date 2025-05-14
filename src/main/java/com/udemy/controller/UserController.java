@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,11 +24,6 @@ public class UserController {
 
     @Autowired
     AuthService authService;
-
-    @PostConstruct
-    public void init() {
-        System.out.println("UserController carregado!");
-    }
 
     @Operation(summary = "Create a user")
     @ApiResponse(responseCode = "200", description = "Success", content =  @Content(schema = @Schema(implementation = UserDTO.class)))
