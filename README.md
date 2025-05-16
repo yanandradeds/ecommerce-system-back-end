@@ -1,6 +1,6 @@
-# API Card Ecommerce
+# REST API - Ecommerce System
 
-### Api who returns informations about my virtual (fake) pokemon's card shop
+### For now: CRUD of users and authentication
 
 
 
