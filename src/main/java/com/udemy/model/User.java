@@ -119,4 +119,8 @@ public class User implements UserDetails {
     public void setEnabled(Boolean enabled) {
         isEnabled = enabled;
     }
+
+    public boolean isNull(){
+        return this.username.isEmpty();
+    }
 }

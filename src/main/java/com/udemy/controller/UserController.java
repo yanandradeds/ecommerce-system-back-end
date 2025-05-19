@@ -25,18 +25,6 @@ public class UserController {
     @Autowired
     AuthService authService;
 
-    @Operation(summary = "Create a user")
-    @ApiResponse(responseCode = "200", description = "Success", content =  @Content(schema = @Schema(implementation = UserDTO.class)))
-    @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema))
-    @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(schema = @Schema))
-    @PostMapping(value = "/create")
-    public String createUser(@RequestBody UserDTO user){
-        if(authService.createUser(user)){
-            return "Success";
-        }
-
-        return "User not created, probably username already exists";
-    }
 
     @Operation(summary = "Find all users")
     @ApiResponse(responseCode = "200", description = "Success", content =  @Content(schema = @Schema(implementation = UserDTO.class)))

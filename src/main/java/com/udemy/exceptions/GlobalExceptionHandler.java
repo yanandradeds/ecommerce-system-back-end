@@ -34,4 +34,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
         return new ResponseEntity<>(localException, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(UserAlreadyInUseException.class)
+    public ResponseEntity<GenericException> userAlreadyInUseExeception(Exception ex, WebRequest request){
+
+        GenericException localException = new GenericException(new Date(),
+                ex.getMessage(),
+                request.getDescription(false),
+                HttpStatus.CONFLICT.value());
+
+        return new ResponseEntity<>(localException, HttpStatus.CONFLICT);
+    }
 }

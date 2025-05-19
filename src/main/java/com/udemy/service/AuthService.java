@@ -1,5 +1,6 @@
 package com.udemy.service;
 
+import com.udemy.exceptions.UserAlreadyInUseException;
 import com.udemy.model.User;
 import com.udemy.repository.UserRepository;
 import com.udemy.security.jwt.TokenHandler;
@@ -38,27 +39,26 @@ public class AuthService {
         return ResponseEntity.ok(tokenResponse);
     }
 
-    public Boolean createUser(UserDTO userVO) {
+    public ResponseEntity<?> createUser(UserDTO userDTO) {
+
         try {
-            User userAlreadyExist = repository.findByUsername(userVO.getUsername());
-            if (userAlreadyExist != null) {
-                return false;
-            }
-        } catch (Exception ignored) {
+            User newUserData = new User();
+            newUserData.setUsername(userDTO.getUsername());
+            newUserData.setPassword(encoder.encode(userDTO.getPassword()));
+            newUserData.setAccountNonExpired(true);
+            newUserData.setEnabled(true);
+            newUserData.setAccountNonLocked(true);
+            newUserData.setCredentialsNonExpired(true);
+            newUserData.setPermissions(null);
+            repository.save(newUserData);
 
+            Long id = repository.findByUsername(userDTO.getUsername()).getId();
+            userDTO.setId(id);
+            return ResponseEntity.ok(userDTO);
         }
-
-        User newUserData = new User();
-        newUserData.setUsername(userVO.getUsername());
-        newUserData.setPassword(encoder.encode(userVO.getPassword()));
-        newUserData.setAccountNonExpired(true);
-        newUserData.setEnabled(true);
-        newUserData.setAccountNonLocked(true);
-        newUserData.setCredentialsNonExpired(true);
-        newUserData.setPermissions(null);
-        repository.save(newUserData);
-
-        return true;
+        catch (Exception e){
+            throw new UserAlreadyInUseException("User already in use");
+        }
     }
 
     public List<UserDTO> findAllUsers(){

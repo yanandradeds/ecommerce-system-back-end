@@ -1,6 +1,6 @@
 services:
   db:
-    image: mysql:8.0.41
+    image: mysql:9.3.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: admin
@@ -16,21 +16,9 @@ services:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
       retries: 5
-
-  app:
-    image: nova-image
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    environment:
-      SPRING.DATASOURCE.URL: jdbc:mysql://db:3308/my_schema
-      SPRING.DATASOURCE.USERNAME: docker
-      SPRING.DATASOURCE.PASSWORD: admin
-    depends_on:
-      db:
-        condition: service_healthy
+  flyway:
+    image: flyway/flyway:latest
+    command: -url=jdbc:mysql://db:3308/my_schema -schemas=my_schema -user=docker -password=admin -connectRetries=10 migrate
     networks:
       - app-network
 
