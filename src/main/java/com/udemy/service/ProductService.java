@@ -3,9 +3,11 @@ package com.udemy.service;
 import com.udemy.model.Product;
 import com.udemy.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,8 +17,9 @@ public class ProductService {
     @Autowired
     ProductRepository repository;
 
-    public List<Product> findAllProducts(){
-        return repository.findAll();
+    public Page<Product> findAllProducts(Integer pageNumber, Integer limit){
+        Pageable pageable = PageRequest.of(pageNumber,limit);
+        return repository.findAll(pageable);
     }
 
     public Product findById(Integer id) {
@@ -26,6 +29,10 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
+        return repository.save(product);
+    }
+
+    public Product updateProduct(Product product) {
         return repository.save(product);
     }
 }
