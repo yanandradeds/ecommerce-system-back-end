@@ -24,5 +24,5 @@ As imagens utilizadas do Docker Hub:
 
 ### Acesso na front page:
 
-- **Usuário:** `admin`
-- **Senha:** `123456`
+- **Usuário:** `yanads`
+- **Senha:** `25745`
